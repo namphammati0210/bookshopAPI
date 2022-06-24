@@ -10,7 +10,6 @@ afterAll(async () => {
 });
 
 const mockBook = {
-  _id: "62a34e137b7d95a7a6ac8da7",
   title: "alo alo",
   price: 1000000000,
 };
@@ -38,6 +37,16 @@ describe("Sunny case: Book testing", () => {
     expect(typeof book).toBe("object");
     expect(book.title).toBe(mockBook.title);
   });
+
+  it("create book OK", async () => {
+    const book = await BookRepository.createBook(mockBook);
+    console.log(
+      "🚀 ~ file: BookRepository.test.js ~ line 44 ~ it ~ book",
+      book
+    );
+    expect(book).toBeTruthy();
+    expect(book.title).toBe(mockBook.title);
+  });
 });
 
-describe("Rainy case: Book testing", () => {});
+describe("Rainny case: Book testing", () => {});

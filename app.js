@@ -9,8 +9,7 @@ const database = require("./database/connect");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-const apiRouter = require("./routes/api/index");
-console.log("🚀 ~ file: app.js ~ line 14 ~ apiRouter", apiRouter);
+var booksRouter = require("./routes/api/book");
 
 var app = express();
 
@@ -55,7 +54,8 @@ const swaggerSpec = swaggerJSDoc(options);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/api", apiRouter);
+app.use("/api", booksRouter);
+5;
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // IIFE

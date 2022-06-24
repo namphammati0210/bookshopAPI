@@ -24,7 +24,20 @@ const getBookById = async (id) => {
   }
 };
 
+const createBook = async (data) => {
+  try {
+    const book = await BookRepository.createBook(data);
+    return book;
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: BookServices.js ~ line 32 ~ createBook ~ error",
+      error
+    );
+  }
+};
+
 module.exports = {
   getAllBooks,
   getBookById,
+  createBook,
 };

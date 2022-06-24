@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const BookServices = require("../../services/BookServices");
-
+const BookController = require("../../controllers/bookController");
 /**
  * @swagger
  * /api/books:
@@ -28,10 +27,7 @@ const BookServices = require("../../services/BookServices");
  *                    type: number
  */
 
-router.get("/books", async (req, res, next) => {
-  const books = await BookServices.getAllBooks();
-  res.send(books);
-});
+router.get("/books", BookController.getAllBooks);
 
 /**
  * @swagger
@@ -59,16 +55,8 @@ router.get("/books", async (req, res, next) => {
  *                    type: number
  */
 
-router.get("/book/:id", async function (req, res, next) {
-  const id = req.params.id;
+router.get("/book/:id", BookController.getBook);
 
-  const book = await BookServices.getBookById(id);
-
-  if (!book) res.sendStatus(400);
-
-  console.log("🚀 ~ file: book.js ~ line 16 ~ book", book);
-
-  res.send(book);
-});
+router.post("/books", BookController.createBook);
 
 module.exports = router;

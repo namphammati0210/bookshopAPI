@@ -24,10 +24,20 @@ const findBookById = async (id) => {
   }
 };
 
-const sum = (a, b) => a + b;
+const createBook = async (data) => {
+  try {
+    const book = await BookModel.create(data);
+    return book;
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: BookRepository.js ~ line 31 ~ createBook ~ error",
+      error
+    );
+  }
+};
 
 module.exports = {
   findAllBooks,
   findBookById,
-  sum,
+  createBook,
 };
