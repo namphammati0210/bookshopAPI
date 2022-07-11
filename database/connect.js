@@ -1,34 +1,26 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 
-const connectDatabase = async () => {
-  // Connect to database
-  try {
-    const connectionString = `mongodb+srv://freeCodeCamp:EJf4TQMfn6Q1Y5hN@cluster0.fevpl.mongodb.net/bookshop?retryWrites=true&w=majority`;
-    const value = await mongoose.connect(connectionString, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+let db;
 
-    if (value) console.log("Connect DB Okay !!!");
-  } catch (error) {
-    console.log(
-      "🚀 ~ file: connect.js ~ line 21 ~ connectDatabase ~ error",
-      error
-    );
-  }
+const connectDatabase = () => {
+  db = mongoose.connect(
+    process.env.DB_URL,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    function (err) {
+      if (err) throw err;
+      console.log("Successfully connected");
+    }
+  );
 };
 
 const disconnectDatabase = async () => {
   // Disconnect from database
-  try {
-    const value = await mongoose.connection.close();
-    if (value) console.log("Disconnect DB Okay !!!");
-  } catch (error) {
+  mongoose.connection.close(function () {
     console.log(
-      "🚀 ~ file: connect.js ~ line 31 ~ disconnectDatabase ~ error",
-      error
+      "Mongoose default connection disconnected through app termination"
     );
-  }
+  });
 };
 
 module.exports = {

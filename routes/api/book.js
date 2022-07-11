@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const BookController = require("../../controllers/bookController");
+const { isLoggedIn } = require("../../middlewares/authMiddleware");
 /**
  * @swagger
  * /api/books:
@@ -27,7 +28,7 @@ const BookController = require("../../controllers/bookController");
  *                    type: number
  */
 
-router.get("/books", BookController.getAllBooks);
+router.get("/books", isLoggedIn, BookController.getAllBooks);
 
 /**
  * @swagger
@@ -55,7 +56,7 @@ router.get("/books", BookController.getAllBooks);
  *                    type: number
  */
 
-router.get("/book/:id", BookController.getBook);
+router.get("/book/:id", isLoggedIn, BookController.getBook);
 
 router.post("/books", BookController.createBook);
 

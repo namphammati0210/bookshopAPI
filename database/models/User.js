@@ -3,11 +3,10 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  title: String,
-  category: String,
-  author: String,
-  description: String,
-  price: Number,
+  email: String,
+  password: String,
+  fullname: String,
+  role: String,
 });
 
 // tạo model

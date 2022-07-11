@@ -1,3 +1,4 @@
+require("dotenv").config();
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
@@ -10,6 +11,7 @@ const database = require("./database/connect");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var booksRouter = require("./routes/api/book");
+var authRouter = require("./routes/api/auth");
 
 var app = express();
 
@@ -55,12 +57,9 @@ const swaggerSpec = swaggerJSDoc(options);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/api", booksRouter);
-5;
+app.use("/auth", authRouter);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// IIFE
-(async () => {
-  await database.connectDatabase();
-})();
+database.connectDatabase();
 
 module.exports = app;
