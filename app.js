@@ -13,6 +13,8 @@ var usersRouter = require("./routes/users");
 var booksRouter = require("./routes/api/book");
 var authRouter = require("./routes/api/auth");
 
+const { isLoggedIn } = require("./middlewares/authMiddleware");
+
 var app = express();
 
 app.use(logger("dev"));
@@ -50,16 +52,20 @@ const options = {
   swaggerDefinition,
   // Paths to files containing OpenAPI definitions
   apis: ["./routes/api/*.js"],
+  // apis: ["./modules/*/router"],
 };
-
 const swaggerSpec = swaggerJSDoc(options);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/api", booksRouter);
+app.use("/api/books", isLoggedIn, booksRouter);
+// app.use("/api/books", booksRouter);
 app.use("/auth", authRouter);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-database.connectDatabase();
+(async () => {
+  /* … */
+  await database.connectDatabase();
+})();
 
 module.exports = app;

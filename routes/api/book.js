@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const BookController = require("../../controllers/bookController");
 const { isLoggedIn } = require("../../middlewares/authMiddleware");
+const { canDeleteBook } = require("../../permissions/book");
 /**
  * @swagger
  * /api/books:
@@ -28,7 +29,7 @@ const { isLoggedIn } = require("../../middlewares/authMiddleware");
  *                    type: number
  */
 
-router.get("/books", isLoggedIn, BookController.getAllBooks);
+router.get("/", BookController.getAllBooks);
 
 /**
  * @swagger
@@ -56,8 +57,12 @@ router.get("/books", isLoggedIn, BookController.getAllBooks);
  *                    type: number
  */
 
-router.get("/book/:id", isLoggedIn, BookController.getBook);
+router.get("/book/:id", BookController.getBook);
 
-router.post("/books", BookController.createBook);
+router.post("/", BookController.createBook);
+
+router.delete("/:id", canDeleteBook, (req, res) => {
+  res.send("Allow delete");
+});
 
 module.exports = router;
