@@ -1,8 +1,8 @@
 const BookRepository = require("../repository/BookRepository");
 
-const getAllBooks = async () => {
+const getAllBooks = async (options) => {
   try {
-    const books = await BookRepository.findAllBooks();
+    const books = await BookRepository.findAllBooks(options);
     return books;
   } catch (error) {
     console.log(

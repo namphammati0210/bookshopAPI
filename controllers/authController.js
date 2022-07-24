@@ -47,7 +47,7 @@ const login = async (req, res, next) => {
       httpOnly: true,
     });
 
-    return res.status(200).send("Login successfully !!!");
+    res.json(token);
   } catch (error) {
     console.log("🚀 ~ file: auth.js ~ line 47 ~ router.post ~ error", error);
     next(error);

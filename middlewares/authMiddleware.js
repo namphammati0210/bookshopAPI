@@ -3,6 +3,10 @@ const jwt = require("jsonwebtoken");
 const isLoggedIn = async (req, res, next) => {
   try {
     const token = req.cookies.access_token || req.headers.access_token;
+    console.log(
+      "🚀 ~ file: authMiddleware.js ~ line 6 ~ isLoggedIn ~ token",
+      token
+    );
 
     if (!token) return res.status(400).send("Haven't logged in yet !!!");
 

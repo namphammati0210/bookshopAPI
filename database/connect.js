@@ -7,7 +7,9 @@ const connectDatabase = async () => {
     useUnifiedTopology: true,
   });
 
-  console.log("Connect OK");
+  console.log(
+    `Connect to Database OK, listening on http://localhost:${process.env.DEV_PORT}`
+  );
 };
 
 const disconnectDatabase = async () => {
