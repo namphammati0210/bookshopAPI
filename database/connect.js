@@ -8,7 +8,9 @@ const connectDatabase = async () => {
   });
 
   console.log(
-    `Connect to Database OK, listening on http://localhost:${process.env.DEV_PORT}`
+    `Connect to Database OK, listening on http://localhost:${
+      process.env.PORT || 3001
+    }`
   );
 };
 
